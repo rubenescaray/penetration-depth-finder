@@ -3,6 +3,8 @@ import SubHeader from '../components/SubHeader';
 import Hawkins from '../components/Hawkins';
 import Americo from '../components/Americo';
 import CardenasBlanco from '../components/CardenasBlanco';
+import Direct from '../components/Direct';
+import ModernRecords from '../components/ModernRecords';
 import { Dropdown } from 'react-bootstrap';
 import { Form, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -26,10 +28,32 @@ class Invation extends Component {
 		this.props.getInvationResult(result.toFixed(2))
 	}
 
+	calculateDirect = (radio) => {
+		this.props.getInvationResult(radio)
+	}
+
 	calculateCardenasBlanco = (porosity) => {
 		let constant = 176.381238;
 		let pow = Math.pow(porosity, -1.408052)
 		let result = constant * pow
+		this.props.getInvationResult(result.toFixed(2))
+	}
+
+	calculateModernRecords = (LPRP, LPRPc) => {
+		let result = 0;
+		let division = LPRPc / LPRP;
+
+		if (division > 1 ) {
+			let div = LPRPc / LPRP;
+			let pow = div - 1;
+			let r = Math.pow(10, pow);
+			result = r / 2;
+		} else if (division < 1) {
+			let div = LPRP / LPRPc;
+			let sub = 1 - div;
+			let mult = 160 * sub;
+			result = mult / 2;
+		}
 		this.props.getInvationResult(result.toFixed(2))
 	}
 
@@ -49,8 +73,12 @@ class Invation extends Component {
   		showEcuation = 2;
   	} else if (ecuation == 3) {
   		showEcuation = 3;
-  	}
-
+  	} else if (ecuation == 4) {
+  		showEcuation = 4;
+  	} else if (ecuation == 5) {
+  		showEcuation = 5;
+  	} 
+ 
     return (
     	<div>
     		<div class="app-title">
@@ -59,18 +87,21 @@ class Invation extends Component {
 				<div class="app-form">
 					<Dropdown>
 					  <Dropdown.Toggle variant="primary" id="dropdown-basic">
-					    Metodo
+					    Tecnica
 					  </Dropdown.Toggle>
 
 					  <Dropdown.Menu>
+					  	<Dropdown.Item eventKey={4} onSelect={this.selectItem}>Metodo Directo</Dropdown.Item>
 					    <Dropdown.Item eventKey={1} onSelect={this.selectItem}>Ecuacion de Hawkins</Dropdown.Item>
 					    <Dropdown.Item eventKey={2} onSelect={this.selectItem}>Ecuacion de Americo</Dropdown.Item>
 					    <Dropdown.Item eventKey={3} onSelect={this.selectItem}>Ecuacion Cardenas-Blanco</Dropdown.Item>
 					  </Dropdown.Menu>
 					</Dropdown>
+					<Direct calculateDirect={this.calculateDirect} show={showEcuation} />
 					<Hawkins calculateHawkins={this.calculateHawkins}  show={showEcuation} />
 					<Americo show={showEcuation} />
 					<CardenasBlanco calculateCardenasBlanco={this.calculateCardenasBlanco} show={showEcuation} />
+					<ModernRecords calculateModernRecords={this.calculateModernRecords} show={showEcuation} />
 				</div>
     	</div>
     ) 

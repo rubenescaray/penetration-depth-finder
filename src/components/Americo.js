@@ -35,7 +35,7 @@ class Hawkins extends Component {
     return (
     	<div>
     		<h1>Metodo Americo</h1>
-    		<div class="app-form">
+    		<div class="method-form">
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
 					    <Form.Control onChange={this.handleChange.bind(this)}  name="porosity" placeholder="Porosidad (%)" />

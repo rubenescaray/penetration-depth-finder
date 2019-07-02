@@ -36,7 +36,7 @@ class Results extends Component {
     		<div class="app-title">
 				  <h2>Resultados</h2>
 				</div>
-				<div class="app-form">
+				<div class="method-form app-form">
 					<Table striped bordered hover>
 				  <thead>
 				    <tr>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SubHeader from '../components/SubHeader';
 import { Dropdown } from 'react-bootstrap';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 class CardenasBlanco extends Component {
@@ -10,6 +10,7 @@ class CardenasBlanco extends Component {
 
 		this.state = {
 			porosity: 0,
+			alert: false,
 		}
 	}
 
@@ -19,8 +20,21 @@ class CardenasBlanco extends Component {
     });
   };
 
+  toggleAlert = () => {
+  	this.setState({ alert: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert: false,
+  		})
+  	},3000)
+  }
+
 	calculate = () => {
 		let { porosity } = this.state
+		if (porosity == '') {
+			this.toggleAlert()
+			return
+		}
 		this.props.calculateCardenasBlanco(porosity);
 	}
 
@@ -33,7 +47,10 @@ class CardenasBlanco extends Component {
 
     return (
     	<div>
-    		<div class="app-form">
+    		<div class="method-form">
+    			<Alert show={this.state.alert} dismissable variant={'danger'}>
+				    Por favor llenar todos los campos
+				  </Alert>
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
 					    <Form.Control onChange={this.handleChange.bind(this)} name="porosity" placeholder="Porosidad (%)" />

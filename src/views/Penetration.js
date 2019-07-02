@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SubHeader from '../components/SubHeader';
 import { Dropdown } from 'react-bootstrap';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 class Penetration extends Component {
@@ -13,10 +13,9 @@ class Penetration extends Component {
 			ressup: 0,
 			resfor: 0,
 			penetrationResult: 0,
+			alert: false,
 		}
 	}
-
-	
 
 	handleChange(e) {
     this.setState({ 
@@ -24,8 +23,21 @@ class Penetration extends Component {
     }, console.log(this.state));
   };
 
+  toggleAlert = () => {
+  	this.setState({ alert: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert: false,
+  		})
+  	},3000)
+  }
+
 	calculatePenetration = () => {
 		let { pensup, ressup, resfor } = this.state;
+		if (pensup == '' || ressup == '' || resfor == '') {
+			this.toggleAlert()
+			return
+		}
 		let res = ressup - resfor;
 		let euler = Math.exp(0.086 * res);
 		let result = pensup * euler;
@@ -39,23 +51,28 @@ class Penetration extends Component {
     		<div class="app-title">
 				  <h2>Penetracion</h2>
 				</div>
-				<Form class="app-form">
-					<Form.Group controlId="formBasicEmail">
-						<Form.Control onChange={this.handleChange.bind(this)} name="pensup" placeholder="Penetracion en Superficie (in)" />
-					</Form.Group>
+				<div class="method-form app-form">
+					<Alert show={this.state.alert} dismissable variant={'danger'}>
+				    Por favor llenar todos los campos
+				  </Alert>
+					<Form>
+						<Form.Group controlId="formBasicEmail">
+							<Form.Control onChange={this.handleChange.bind(this)} name="pensup" placeholder="Penetracion en Superficie (in)" />
+						</Form.Group>
 
-				  <Form.Group controlId="formBasicPassword">
-				    <Form.Control onChange={this.handleChange.bind(this)} name="ressup"  placeholder="Resistencia Compresiva en Superficie (kpsi)" />
-				  </Form.Group>
-					  
-				  <Form.Group controlId="formBasicPassword">
-				    <Form.Control onChange={this.handleChange.bind(this)} name="resfor"  placeholder="Resistencia Compresiva de la Formacion (kpsi)" />
-				  </Form.Group>
-				</Form>
-			  
-			  <Button variant="primary" onClick={this.calculatePenetration}>
-			  	Continuar
-			  </Button>
+					  <Form.Group controlId="formBasicPassword">
+					    <Form.Control onChange={this.handleChange.bind(this)} name="ressup"  placeholder="Resistencia Compresiva en Superficie (kpsi)" />
+					  </Form.Group>
+						  
+					  <Form.Group controlId="formBasicPassword">
+					    <Form.Control onChange={this.handleChange.bind(this)} name="resfor"  placeholder="Resistencia Compresiva de la Formacion (kpsi)" />
+					  </Form.Group>
+					</Form>
+				  
+				  <Button variant="primary" onClick={this.calculatePenetration}>
+				  	Continuar
+				  </Button>
+				</div>
     	</div>
     ) 
   }

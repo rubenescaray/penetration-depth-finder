@@ -4,14 +4,12 @@ import { Dropdown } from 'react-bootstrap';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
-class Hawkins extends Component {
+class Direct extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			wellRadio: 0,
-			permeability: 0,
-			damage: 0,
+			radio: 0,
 			alert: false,
 		}
 	}
@@ -32,18 +30,18 @@ class Hawkins extends Component {
   }
 
 	calculate = () => {
-		let { wellRadio, permeability, damage } = this.state
-		if (wellRadio == '' || permeability == '' || damage == '') {
+		let { radio } = this.state
+		if (radio == '') {
 			this.toggleAlert()
 			return
 		}
-		this.props.calculateHawkins(wellRadio, permeability, damage);
+		this.props.calculateDirect(radio);
 	}
 
   render() {
   	let { show } = this.props;
 
-  	if(show != 1) {
+  	if(show != 4) {
   		return <div></div>;
   	}
 
@@ -56,18 +54,7 @@ class Hawkins extends Component {
 				  </Alert>
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
-					    <Form.Control onChange={this.handleChange.bind(this)} name="wellRadio" placeholder="Radio del Pozo (in)" />
-					  </Form.Group>
-
-					  <Form.Group controlId="formBasicPassword">
-					    <Form.Control 
-					    	onChange={this.handleChange.bind(this)} 
-					    	name="permeability"
-					    	placeholder="Reduccion de Permeabilidad por efectos de Invasion (k/ks)" />
-					  </Form.Group>
-					  
-					  <Form.Group controlId="formBasicPassword">
-					    <Form.Control onChange={this.handleChange.bind(this)} name="damage"  placeholder="Daño (S)" />
+					    <Form.Control onChange={this.handleChange.bind(this)} name="radio" placeholder="Radio de Invasion (in)" />
 					  </Form.Group>
 
 					  <Button variant="primary" onClick={this.calculate}>
@@ -80,4 +67,4 @@ class Hawkins extends Component {
   }
 }
 
-export default Hawkins;
+export default Direct;

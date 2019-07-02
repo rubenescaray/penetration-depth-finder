@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SubHeader from '../components/SubHeader';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert  } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class GeneralData extends Component {
@@ -12,6 +12,7 @@ class GeneralData extends Component {
 			engineer: '',
 			well: '',
 			field: '',
+			alert: false,
 		}
 	}
 
@@ -21,8 +22,21 @@ class GeneralData extends Component {
     });
   }
 
+  toggleAlert = () => {
+  	this.setState({ alert: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert: false,
+  		})
+  	},3000)
+  }
+
   submitGeneralData = () => {
   	let { company, engineer, well, field } = this.state
+  	if (company == '' || engineer == '' || well == '' || field == '') {
+			this.toggleAlert()
+			return
+		}
   	this.props.getGeneralData(company, engineer, well, field)
   }
 
@@ -34,6 +48,9 @@ class GeneralData extends Component {
 				  <h2>Datos Generales</h2>
 				</div>
 				<div class="app-form">
+					<Alert show={this.state.alert} dismissable variant={'danger'}>
+				    Por favor llenar todos los campos
+				  </Alert>
 					<Form>
 					  <Form.Group controlId="formBasicEmail">
 					    <Form.Control onChange={this.handleChange.bind(this)} name="company" placeholder="Compañia" />
