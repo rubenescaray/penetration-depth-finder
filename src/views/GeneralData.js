@@ -53,7 +53,7 @@ class GeneralData extends Component {
 				  </Alert>
 					<Form>
 					  <Form.Group controlId="formBasicEmail">
-					    <Form.Control onChange={this.handleChange.bind(this)} name="company" placeholder="Compañia" />
+					    <Form.Control onChange={this.handleChange.bind(this)} name="company" placeholder="Compañía" />
 					  </Form.Group>
 
 					  <Form.Group controlId="formBasicPassword">

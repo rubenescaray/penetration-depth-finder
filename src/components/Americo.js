@@ -34,19 +34,14 @@ class Hawkins extends Component {
 
     return (
     	<div>
-    		<h1>Metodo Americo</h1>
     		<div class="method-form">
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
 					    <Form.Control onChange={this.handleChange.bind(this)}  name="porosity" placeholder="Porosidad (%)" />
 					  </Form.Group>
 
-					  <Button variant="danger" onClick={this.calculateAmerico.bind(this)}>
-					  	Calcular
-					  </Button>
-
-					  <Button variant="success" type="submit">
-					    <Link to="/invation">Continuar</Link>
+					  <Button variant="primary" type="submit">
+					    Continuar
 					  </Button>
 					</Form>
 				</div>

@@ -63,7 +63,7 @@ class Hawkins extends Component {
 					    <Form.Control 
 					    	onChange={this.handleChange.bind(this)} 
 					    	name="permeability"
-					    	placeholder="Reduccion de Permeabilidad por efectos de Invasion (k/ks)" />
+					    	placeholder="Reducción de Permeabilidad por efectos de Invasión (k/ks)" />
 					  </Form.Group>
 					  
 					  <Form.Group controlId="formBasicPassword">

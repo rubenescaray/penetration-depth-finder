@@ -49,7 +49,7 @@ class Penetration extends Component {
     return (
     	<div>
     		<div class="app-title">
-				  <h2>Penetracion</h2>
+				  <h2>Penetración</h2>
 				</div>
 				<div class="method-form app-form">
 					<Alert show={this.state.alert} dismissable variant={'danger'}>
@@ -57,7 +57,7 @@ class Penetration extends Component {
 				  </Alert>
 					<Form>
 						<Form.Group controlId="formBasicEmail">
-							<Form.Control onChange={this.handleChange.bind(this)} name="pensup" placeholder="Penetracion en Superficie (in)" />
+							<Form.Control onChange={this.handleChange.bind(this)} name="pensup" placeholder="Penetración en Superficie (in)" />
 						</Form.Group>
 
 					  <Form.Group controlId="formBasicPassword">
@@ -65,7 +65,7 @@ class Penetration extends Component {
 					  </Form.Group>
 						  
 					  <Form.Group controlId="formBasicPassword">
-					    <Form.Control onChange={this.handleChange.bind(this)} name="resfor"  placeholder="Resistencia Compresiva de la Formacion (kpsi)" />
+					    <Form.Control onChange={this.handleChange.bind(this)} name="resfor"  placeholder="Resistencia Compresiva de la Formación (kpsi)" />
 					  </Form.Group>
 					</Form>
 				  

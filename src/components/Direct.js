@@ -54,7 +54,7 @@ class Direct extends Component {
 				  </Alert>
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
-					    <Form.Control onChange={this.handleChange.bind(this)} name="radio" placeholder="Radio de Invasion (in)" />
+					    <Form.Control onChange={this.handleChange.bind(this)} name="radio" placeholder="Radio de Invasión (in)" />
 					  </Form.Group>
 
 					  <Button variant="primary" onClick={this.calculate}>

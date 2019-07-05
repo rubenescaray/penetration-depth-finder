@@ -40,13 +40,13 @@ class Results extends Component {
 					<Table striped bordered hover>
 				  <thead>
 				    <tr>
-				    	<th>Compañia</th>
+				    	<th>Compañía</th>
 				    	<th>Ingeniero</th>
 				      <th>Pozo</th>
 				      <th>Campo</th>
-				      <th>Radio Invasion (in)</th>
-				      <th>Radio de Invasion + 6 in (in)</th>
-				      <th>Penetracion del Disparo (in)</th>
+				      <th>Radio Invasión (in)</th>
+				      <th>Radio de Invasión + 6 in (in)</th>
+				      <th>Penetración del Disparo (in)</th>
 				      <th>Se sobrepaso la zona invadida de manera satisfactoria o desfavorable</th>
 				    </tr>
 				  </thead>

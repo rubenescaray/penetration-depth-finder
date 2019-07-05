@@ -66,15 +66,20 @@ class Invation extends Component {
   render() {
   	let { ecuation } = this.state;
   	let showEcuation;
+  	let ecuacionTitle = '';
 
   	if (ecuation == 1) {
   		showEcuation = 1;
+  		ecuacionTitle = "Ecuación de Hawkins"
   	}else if (ecuation == 2) {
   		showEcuation = 2;
+  		ecuacionTitle = "Ecuación de Américo Perozo"
   	} else if (ecuation == 3) {
   		showEcuation = 3;
+  		ecuacionTitle = "Ecuación por Porosidad (Cardenas-Blanco)"
   	} else if (ecuation == 4) {
   		showEcuation = 4;
+  		ecuacionTitle = "Método Directo"
   	} else if (ecuation == 5) {
   		showEcuation = 5;
   	} 
@@ -85,18 +90,21 @@ class Invation extends Component {
 				  <h2>Radio de Invasion</h2>
 				</div>
 				<div class="app-form">
-					<Dropdown>
-					  <Dropdown.Toggle variant="primary" id="dropdown-basic">
-					    Tecnica
-					  </Dropdown.Toggle>
+					<div style={{ display: 'flex' }}>
+						<Dropdown>
+						  <Dropdown.Toggle variant="primary" id="dropdown-basic">
+						    Técnica
+						  </Dropdown.Toggle>
 
-					  <Dropdown.Menu>
-					  	<Dropdown.Item eventKey={4} onSelect={this.selectItem}>Metodo Directo</Dropdown.Item>
-					    <Dropdown.Item eventKey={1} onSelect={this.selectItem}>Ecuacion de Hawkins</Dropdown.Item>
-					    <Dropdown.Item eventKey={2} onSelect={this.selectItem}>Ecuacion de Americo</Dropdown.Item>
-					    <Dropdown.Item eventKey={3} onSelect={this.selectItem}>Ecuacion Cardenas-Blanco</Dropdown.Item>
-					  </Dropdown.Menu>
-					</Dropdown>
+						  <Dropdown.Menu>
+						  	<Dropdown.Item eventKey={4} onSelect={this.selectItem}>Método Directo</Dropdown.Item>
+						    <Dropdown.Item eventKey={1} onSelect={this.selectItem}>Ecuación de Hawkins</Dropdown.Item>
+						    <Dropdown.Item eventKey={2} onSelect={this.selectItem}>Ecuación de Américo</Dropdown.Item>
+						    <Dropdown.Item eventKey={3} onSelect={this.selectItem}>Ecuación por Porosidad (Cardenas-Blanco)</Dropdown.Item>
+						  </Dropdown.Menu>
+						</Dropdown>
+						<h3 style={{ marginLeft: '15px' }}>{ecuacionTitle}</h3>
+					</div>
 					<Direct calculateDirect={this.calculateDirect} show={showEcuation} />
 					<Hawkins calculateHawkins={this.calculateHawkins}  show={showEcuation} />
 					<Americo show={showEcuation} />
