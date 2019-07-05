@@ -36,7 +36,7 @@ function Header() {
         <Tab eventKey="home" title="Inicio">
           <Home />
         </Tab>
-        <Tab eventKey="app" title="Aplicacion">
+        <Tab eventKey="app" title="Aplicación">
           <Aplication />
         </Tab>
         <Tab eventKey="about" title="Contacto">

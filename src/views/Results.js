@@ -47,7 +47,7 @@ class Results extends Component {
 				      <th>Radio Invasión (in)</th>
 				      <th>Radio de Invasión + 6 in (in)</th>
 				      <th>Penetración del Disparo (in)</th>
-				      <th>Se sobrepaso la zona invadida de manera satisfactoria o desfavorable</th>
+				      <th>Se sobrepasó la zona invadida de manera satisfactoria o desfavorable</th>
 				    </tr>
 				  </thead>
 				  <tbody>

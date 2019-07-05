@@ -70,10 +70,10 @@ class Invation extends Component {
 
   	if (ecuation == 1) {
   		showEcuation = 1;
-  		ecuacionTitle = "Ecuación de Hawkins"
+  		ecuacionTitle = "Ecuación dé Hawkins"
   	}else if (ecuation == 2) {
   		showEcuation = 2;
-  		ecuacionTitle = "Ecuación de Américo Perozo"
+  		ecuacionTitle = "Ecuación dé Américo Perozo"
   	} else if (ecuation == 3) {
   		showEcuation = 3;
   		ecuacionTitle = "Ecuación por Porosidad (Cardenas-Blanco)"
@@ -87,7 +87,7 @@ class Invation extends Component {
     return (
     	<div>
     		<div class="app-title">
-				  <h2>Radio de Invasion</h2>
+				  <h2>Radio de Invasión</h2>
 				</div>
 				<div class="app-form">
 					<div style={{ display: 'flex' }}>
@@ -98,8 +98,8 @@ class Invation extends Component {
 
 						  <Dropdown.Menu>
 						  	<Dropdown.Item eventKey={4} onSelect={this.selectItem}>Método Directo</Dropdown.Item>
-						    <Dropdown.Item eventKey={1} onSelect={this.selectItem}>Ecuación de Hawkins</Dropdown.Item>
-						    <Dropdown.Item eventKey={2} onSelect={this.selectItem}>Ecuación de Américo</Dropdown.Item>
+						    <Dropdown.Item eventKey={1} onSelect={this.selectItem}>Ecuación dé Hawkins</Dropdown.Item>
+						    <Dropdown.Item eventKey={2} onSelect={this.selectItem}>Ecuación dé Américo Perozo</Dropdown.Item>
 						    <Dropdown.Item eventKey={3} onSelect={this.selectItem}>Ecuación por Porosidad (Cardenas-Blanco)</Dropdown.Item>
 						  </Dropdown.Menu>
 						</Dropdown>
