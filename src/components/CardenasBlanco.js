@@ -10,6 +10,7 @@ class CardenasBlanco extends Component {
 
 		this.state = {
 			porosity: 0,
+			holeDiameter: 0,
 			alert: false,
 		}
 	}
@@ -54,6 +55,10 @@ class CardenasBlanco extends Component {
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
 					    <Form.Control onChange={this.handleChange.bind(this)} name="porosity" placeholder="Porosidad (%)" />
+					  </Form.Group>
+
+					  <Form.Group controlId="formBasicEmail">
+					    <Form.Control onChange={this.handleChange.bind(this)} name="holeDiameter" placeholder="Diámetro del Hoyo (in)" />
 					  </Form.Group>
 
 					  <Button variant="primary" onClick={this.calculate}>
