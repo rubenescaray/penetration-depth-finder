@@ -3,15 +3,17 @@ import SubHeader from '../components/SubHeader';
 import { Dropdown } from 'react-bootstrap';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { isValidNumber } from "../helpers";
 
 class CardenasBlanco extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			porosity: 0,
-			holeDiameter: 0,
+			porosity: '',
+			holeDiameter:'',
 			alert: false,
+			alert2: false,
 		}
 	}
 
@@ -30,13 +32,29 @@ class CardenasBlanco extends Component {
   	},3000)
   }
 
+  toggleAlert2 = () => {
+  	this.setState({ alert2: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert2: false,
+  		})
+  	},3000)
+  }
+
 	calculate = () => {
-		let { porosity } = this.state
-		if (porosity == '') {
+		let { porosity, holeDiameter } = this.state
+		if (porosity === '' || holeDiameter === '') {
 			this.toggleAlert()
 			return
+		} else if (!isValidNumber(porosity) || !isValidNumber(holeDiameter)) {
+			this.toggleAlert2()
+			return
 		}
-		this.props.calculateCardenasBlanco(porosity);
+		this.props.calculateCardenasBlanco(porosity. holeDiameter);
+		this.setState({
+			porosity: '',
+			holeDiameter: '',
+		})
 	}
 
   render() {
@@ -51,6 +69,9 @@ class CardenasBlanco extends Component {
     		<div class="method-form">
     			<Alert show={this.state.alert} dismissable variant={'danger'}>
 				    Por favor llenar todos los campos
+				  </Alert>
+				  <Alert show={this.state.alert2} dismissable variant={'danger'}>
+				    Por favor, no utilizar valores negativos o iguales a 0
 				  </Alert>
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">

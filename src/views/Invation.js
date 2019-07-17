@@ -32,10 +32,17 @@ class Invation extends Component {
 		this.props.getInvationResult(radio)
 	}
 
-	calculateCardenasBlanco = (porosity) => {
+	calculateCardenasBlanco = (porosity, holeDiameter) => {
 		let constant = 176.381238;
-		let pow = Math.pow(porosity, -1.408052)
-		let result = constant * pow
+		let pow = Math.pow(porosity, -1.408052);
+		let result = ((constant * pow) * holeDiameter) / 2;
+ 		this.props.getInvationResult(result.toFixed(2))
+	}
+
+	calculateAmerico = (porosity) => {
+		let factor = -0.1144;
+		let euler = Math.exp(factor * porosity);
+		let result = 215 * euler;
 		this.props.getInvationResult(result.toFixed(2))
 	}
 
@@ -70,10 +77,10 @@ class Invation extends Component {
 
   	if (ecuation == 1) {
   		showEcuation = 1;
-  		ecuacionTitle = "Ecuación dé Hawkins"
+  		ecuacionTitle = "Ecuación de Hawkins"
   	}else if (ecuation == 2) {
   		showEcuation = 2;
-  		ecuacionTitle = "Ecuación dé Américo Perozo"
+  		ecuacionTitle = "Ecuación de Américo Perozo"
   	} else if (ecuation == 3) {
   		showEcuation = 3;
   		ecuacionTitle = "Ecuación por Porosidad (Cardenas-Blanco)"
@@ -98,8 +105,8 @@ class Invation extends Component {
 
 						  <Dropdown.Menu>
 						  	<Dropdown.Item eventKey={4} onSelect={this.selectItem}>Método Directo</Dropdown.Item>
-						    <Dropdown.Item eventKey={1} onSelect={this.selectItem}>Ecuación dé Hawkins</Dropdown.Item>
-						    <Dropdown.Item eventKey={2} onSelect={this.selectItem}>Ecuación dé Américo Perozo</Dropdown.Item>
+						    <Dropdown.Item eventKey={1} onSelect={this.selectItem}>Ecuación de Hawkins</Dropdown.Item>
+						    <Dropdown.Item eventKey={2} onSelect={this.selectItem}>Ecuación de Américo Perozo</Dropdown.Item>
 						    <Dropdown.Item eventKey={3} onSelect={this.selectItem}>Ecuación por Porosidad (Cardenas-Blanco)</Dropdown.Item>
 						  </Dropdown.Menu>
 						</Dropdown>
@@ -107,7 +114,7 @@ class Invation extends Component {
 					</div>
 					<Direct calculateDirect={this.calculateDirect} show={showEcuation} />
 					<Hawkins calculateHawkins={this.calculateHawkins}  show={showEcuation} />
-					<Americo show={showEcuation} />
+					<Americo calculateAmerico={this.calculateAmerico} show={showEcuation} />
 					<CardenasBlanco calculateCardenasBlanco={this.calculateCardenasBlanco} show={showEcuation} />
 					<ModernRecords calculateModernRecords={this.calculateModernRecords} show={showEcuation} />
 				</div>

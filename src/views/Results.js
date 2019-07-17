@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SubHeader from '../components/SubHeader';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 
 class Results extends Component {
 	constructor(props){
@@ -8,6 +8,7 @@ class Results extends Component {
 
 		this.state = {
 			satisfactory: false,
+			compareResult: 0,
 		}
 	}
 
@@ -23,13 +24,17 @@ class Results extends Component {
 		if(invation_plus < penetration) {
 			return this.setState({
 				satisfactory: true,
+				compareResult: Number.isInteger(invation_plus) ? invation_plus : invation_plus.toFixed(2),
 			})
 		}
+		this.setState({
+			compareResult: Number.isInteger(invation_plus) ? invation_plus : invation_plus.toFixed(2),
+		})
 	}
 
   render() {
   	let { invationResult, generalData, penetrationResult } = this.props.results
-  	let { satisfactory } = this.state
+  	let { satisfactory, compareResult } = this.state
 
     return (
     	<div>
@@ -44,7 +49,7 @@ class Results extends Component {
 				    	<th>Ingeniero</th>
 				      <th>Pozo</th>
 				      <th>Campo</th>
-				      <th>Radio Invasión (in)</th>
+				      <th>Radio de Invasión (in)</th>
 				      <th>Radio de Invasión + 6 in (in)</th>
 				      <th>Penetración del Disparo (in)</th>
 				      <th>Se sobrepasó la zona invadida de manera satisfactoria o desfavorable</th>
@@ -57,12 +62,15 @@ class Results extends Component {
 				      <td>{generalData.well}</td>
 				      <td>{generalData.field}</td>
 				      <td>{invationResult}</td>
-				      <td>{Number(invationResult) + 6}</td>
+				      <td>{compareResult}</td>
 				      <td>{penetrationResult}</td>
-				      <td>{satisfactory ? 'Satisfactorio' : 'No fue satisfactorio'}</td>
+				      <td>{satisfactory ? 'Satisfactorio' : 'Desfavorable'}</td>
 				    </tr>
 				  </tbody>
 				</Table>
+				<Button variant="primary" onClick={this.props.restartApplication}>
+			  	Reiniciar
+		  	</Button>
 				</div>
     	</div>
     ) 

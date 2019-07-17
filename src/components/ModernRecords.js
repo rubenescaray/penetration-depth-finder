@@ -9,8 +9,8 @@ class ModernRecords extends Component {
 		super(props)
 
 		this.state = {
-			lprp: 0,
-			lprpc: 0,
+			lprp: '',
+			lprpc: '',
 			alert: false,
 		}
 	}
@@ -32,11 +32,15 @@ class ModernRecords extends Component {
 
 	calculate = () => {
 		let { lprp, lprpc } = this.state;
-		if (lprpc == '' || lprp == '') {
+		if (lprpc === '' || lprp === '') {
 			this.toggleAlert()
 			return
 		}
 		this.props.calculateModernRecords(lprp, lprpc);
+		this.setState({
+			lprpc: '',
+			lprp: '',
+		})
 	}
 
   render() {

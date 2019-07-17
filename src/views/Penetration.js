@@ -3,6 +3,7 @@ import SubHeader from '../components/SubHeader';
 import { Dropdown } from 'react-bootstrap';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { isValidNumber } from "../helpers";
 
 class Penetration extends Component {
 	constructor(props) {
@@ -14,6 +15,7 @@ class Penetration extends Component {
 			resfor: 0,
 			penetrationResult: 0,
 			alert: false,
+			alert2: false,
 		}
 	}
 
@@ -32,16 +34,33 @@ class Penetration extends Component {
   	},3000)
   }
 
+  toggleAlert2 = () => {
+  	this.setState({ alert2: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert2: false,
+  		})
+  	},3000)
+  }
+
 	calculatePenetration = () => {
 		let { pensup, ressup, resfor } = this.state;
 		if (pensup == '' || ressup == '' || resfor == '') {
 			this.toggleAlert()
 			return
+		} else if (!isValidNumber(pensup) || !isValidNumber(ressup) || !isValidNumber(resfor)) {
+			this.toggleAlert2()
+			return
 		}
 		let res = ressup - resfor;
 		let euler = Math.exp(0.086 * res);
 		let result = pensup * euler;
-		this.props.getPenetrationResult(result.toFixed(2))
+		this.props.getPenetrationResult(result.toFixed(2));
+		this.setState({
+			pensup: '',
+			ressup: '',
+			resfor: '',
+		})
 	}
 
   render() {
@@ -54,6 +73,9 @@ class Penetration extends Component {
 				<div class="method-form app-form">
 					<Alert show={this.state.alert} dismissable variant={'danger'}>
 				    Por favor llenar todos los campos
+				  </Alert>
+				  <Alert show={this.state.alert2} dismissable variant={'danger'}>
+				    Por favor, no utilizar valores negativos o iguales a 0
 				  </Alert>
 					<Form>
 						<Form.Group controlId="formBasicEmail">

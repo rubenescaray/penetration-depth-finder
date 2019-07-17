@@ -3,6 +3,7 @@ import SubHeader from '../components/SubHeader';
 import { Dropdown } from 'react-bootstrap';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { isValidNumber } from "../helpers";
 
 class Hawkins extends Component {
 	constructor(props) {
@@ -13,6 +14,7 @@ class Hawkins extends Component {
 			permeability: 0,
 			damage: 0,
 			alert: false,
+			alert2: false,
 		}
 	}
 
@@ -31,13 +33,30 @@ class Hawkins extends Component {
   	},3000)
   }
 
+  toggleAlert2 = () => {
+  	this.setState({ alert2: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert2: false,
+  		})
+  	},3000)
+  }
+
 	calculate = () => {
 		let { wellRadio, permeability, damage } = this.state
-		if (wellRadio == '' || permeability == '' || damage == '') {
+		if (wellRadio === '' || permeability === '' || damage === '') {
 			this.toggleAlert()
+			return
+		} else if (!isValidNumber(wellRadio) || !isValidNumber(permeability)) {
+			this.toggleAlert2()
 			return
 		}
 		this.props.calculateHawkins(wellRadio, permeability, damage);
+		this.setState({
+			wellRadio: '',
+			permeability: '',
+			damage: '',
+		})
 	}
 
   render() {
@@ -53,6 +72,9 @@ class Hawkins extends Component {
     		<div class="method-form">
     			<Alert show={this.state.alert} dismissable variant={'danger'}>
 				    Por favor llenar todos los campos
+				  </Alert>
+				  <Alert show={this.state.alert2} dismissable variant={'danger'}>
+				    Por favor, no utilizar valores negativos o iguales a 0
 				  </Alert>
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">

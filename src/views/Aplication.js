@@ -52,6 +52,14 @@ class Aplication extends Component {
 		}, this.changeTab(3))
 	}
 
+	restartApplication = () => {
+		this.setState({
+			generalData: {},
+			invationResult: 0,
+			penetrationResult: 0,
+		}, this.changeTab(0))
+	}
+
   render() {
   	let { activeTab, generalData, invationResult, penetrationResult } = this.state
   	
@@ -70,7 +78,7 @@ class Aplication extends Component {
   	} else if (activeTab == 2) {
   		activeComponent = <Penetration getPenetrationResult={this.getPenetrationResult} />
   	} else if (activeTab == 3) {
-  		activeComponent = <Results results={results} />
+  		activeComponent = <Results restartApplication={this.restartApplication} results={results} />
   	}
 
     return(

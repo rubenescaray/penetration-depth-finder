@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import SubHeader from '../components/SubHeader';
 import { Dropdown } from 'react-bootstrap';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { isValidNumber } from "../helpers";
 
 class Hawkins extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			porosity: 0,
+			porosity: '',
+			alert: false,
+			alert2: false,
 		}
 	}
 
@@ -18,31 +21,63 @@ class Hawkins extends Component {
     }, console.log(this.state));
   };
 
-	calculateAmerico() {
+  toggleAlert = () => {
+  	this.setState({ alert: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert: false,
+  		})
+  	},3000)
+  }
+
+  toggleAlert2 = () => {
+  	this.setState({ alert2: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert2: false,
+  		})
+  	},3000)
+  }
+
+	calculate = () => {
 		let { porosity } = this.state
-		let factor = -0.1144;
-		let euler = Math.exp(factor * porosity);
-		let result = 215 * euler;
-		alert(result.toFixed(2));
+		if (porosity === '') {
+			this.toggleAlert()
+			return
+		} else if (!isValidNumber(porosity)) {
+			this.toggleAlert2()
+			return
+		}
+
+		this.props.calculateAmerico(porosity);
+		this.setState({
+			porosity: '',
+		})
 	}
 
   render() {
   	let { show } = this.props
-  	if(show != 2) {
+  	if (show != 2) {
   		return <div></div>;
   	}
 
     return (
     	<div>
     		<div class="method-form">
+    			<Alert show={this.state.alert} dismissable variant={'danger'}>
+				    Por favor llenar todos los campos
+				  </Alert>
+				  <Alert show={this.state.alert2} dismissable variant={'danger'}>
+				    Por favor, no utilizar valores negativos o iguales a 0
+				  </Alert>
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
 					    <Form.Control onChange={this.handleChange.bind(this)}  name="porosity" placeholder="Porosidad (%)" />
 					  </Form.Group>
 
-					  <Button variant="primary" type="submit">
-					    Continuar
-					  </Button>
+					  <Button variant="primary" onClick={this.calculate}>
+					  	Continuar
+				  	</Button>
 					</Form>
 				</div>
     	</div>

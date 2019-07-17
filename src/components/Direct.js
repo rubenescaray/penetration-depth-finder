@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import SubHeader from '../components/SubHeader';
 import { Dropdown } from 'react-bootstrap';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { isValidNumber } from "../helpers";
 
 class Direct extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			radio: 0,
+			radio: '',
 			alert: false,
+			alert2: false,
 		}
 	}
 
@@ -29,10 +30,22 @@ class Direct extends Component {
   	},3000)
   }
 
+  toggleAlert2 = () => {
+  	this.setState({ alert2: true })
+  	setTimeout(() => {
+  		this.setState({
+  			alert2: false,
+  		})
+  	},3000)
+  }
+
 	calculate = () => {
 		let { radio } = this.state
-		if (radio == '') {
+		if (radio === '') {
 			this.toggleAlert()
+			return
+		} else if (!isValidNumber(radio)) {
+			this.toggleAlert2()
 			return
 		}
 		this.props.calculateDirect(radio);
@@ -51,6 +64,9 @@ class Direct extends Component {
     		<div class="method-form">
     			<Alert show={this.state.alert} dismissable variant={'danger'}>
 				    Por favor llenar todos los campos
+				  </Alert>
+				  <Alert show={this.state.alert2} dismissable variant={'danger'}>
+				    Por favor, no utilizar valores negativos o iguales a 0
 				  </Alert>
 	    		<Form>
 					  <Form.Group controlId="formBasicEmail">
