@@ -50,7 +50,7 @@ class CardenasBlanco extends Component {
 			this.toggleAlert2()
 			return
 		}
-		this.props.calculateCardenasBlanco(porosity. holeDiameter);
+		this.props.calculateCardenasBlanco(porosity, holeDiameter);
 		this.setState({
 			porosity: '',
 			holeDiameter: '',

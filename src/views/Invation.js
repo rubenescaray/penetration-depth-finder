@@ -35,7 +35,9 @@ class Invation extends Component {
 	calculateCardenasBlanco = (porosity, holeDiameter) => {
 		let constant = 176.381238;
 		let pow = Math.pow(porosity, -1.408052);
-		let result = ((constant * pow) * holeDiameter) / 2;
+		let conpow = constant * pow;
+		let condia = conpow * holeDiameter;
+		let result = condia / 2;
  		this.props.getInvationResult(result.toFixed(2))
 	}
 
