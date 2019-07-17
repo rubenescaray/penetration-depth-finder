@@ -42,7 +42,7 @@ class Invation extends Component {
 	calculateAmerico = (porosity) => {
 		let factor = -0.1144;
 		let euler = Math.exp(factor * porosity);
-		let result = 215 * euler;
+		let result = (215 * euler) / 2;
 		this.props.getInvationResult(result.toFixed(2))
 	}
 
